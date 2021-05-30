@@ -10,7 +10,7 @@ import javax.inject.Inject;
 public class ServiceFruit {
 
     @Inject
-    RepoFruit repo;
+    RepositoryFruit repo;
 
     public ServiceFruit() { 
         // CDI

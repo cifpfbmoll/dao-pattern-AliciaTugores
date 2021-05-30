@@ -7,21 +7,15 @@ import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
+import io.quarkus.hibernate.orm.panache.PanacheRepository;
 
 @ApplicationScoped
-public class RepoFruit {
+public class RepositoryFruit implements PanacheRepository<Fruit> {
 
-    private Set<Fruit> fruits = Collections.newSetFromMap(Collections.synchronizedMap(new LinkedHashMap<>()));
+    public Set<Fruit> fruits = Collections.newSetFromMap(Collections.synchronizedMap(new LinkedHashMap<>()));
 
-    public RepoFruit() {
+    public RepositoryFruit() {
         // CDI
-    }
-
-    @PostConstruct
-    public void init() {
-        fruits.clear();
-        fruits.add(new Fruit("Apple", "Winter fruit"));
-        fruits.add(new Fruit("Pineapple", "Tropical fruit"));
     }
 
     public Set<Fruit> list() {

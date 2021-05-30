@@ -14,7 +14,12 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @Entity
 @Table(name="Fruit")
 @JsonPropertyOrder({"name", "decription"})
-public class Fruit{
+public class Fruit {
+
+    // Las propiedades han de ser publicas para que jackson
+    // pueda acceder a ellar por reflection o configurar getter y setter
+    // Internamente Quarkus hace la propiedad public
+    // Mantengo el getter porque lo uso en los casos test
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,8 +27,8 @@ public class Fruit{
 
     @NotBlank
     @Column(unique = true)
-    private String name;
-
+    public String name;
+    
     @NotEmpty
     @Column
     public String description;

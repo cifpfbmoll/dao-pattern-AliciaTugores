@@ -1,7 +1,7 @@
 package org.pingpong.restjson;
 
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -16,19 +16,21 @@ public class ServiceFruit {
         // CDI
     }
 
-    public Set<Fruit> list() {
-        return repo.list();
+    public List<Fruit> list() {
+        return repo.listAllOrderedByName();
     }
 
     public void add(Fruit fruit) {
-        repo.add(fruit);
+        repo.persist(fruit);
     }
 
     public void remove(String name) {
-        repo.remove(name);
+        repo.deleteByName(name);
     }
 
     public Optional<Fruit> getFruit(String name) {
-        return name.isBlank()? Optional.ofNullable(null) : repo.get(name);
+        return name.isBlank()? 
+            Optional.ofNullable(null) : 
+            repo.findByNameOptional(name);
     }
 }
